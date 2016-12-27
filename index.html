@@ -1,0 +1,47 @@
+<html>
+
+  <head>
+    <!--Set base url-->
+    <base href="/">
+    <title>Angular 2 QuickStart</title>
+    <!--<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css"></style>-->
+    <link rel="stylesheet" href="app/assets/bootstrap.min.css"></style>
+    <link rel="stylesheet" href="app/styles.css"></style>
+    
+    <style>
+        /*body { padding: 30px; }*/
+    </style>
+    <!-- 1. Load libraries -->
+    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+    <!--Reactive extensions-->
+    <script src="node_modules/rxjs/bundles/Rx.js"></script>
+    <!--Core angular 2 scripts-->
+    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
+    <!--router support-->
+    <script src="node_modules/angular2/bundles/router.dev.js"></script>
+    <script src="node_modules/angular2/bundles/http.dev.js"></script>
+
+    <script src="https://use.fontawesome.com/1586a593c3.js"></script>  
+    <!-- 2. Configure SystemJS -->
+    <script>
+      System.config({
+        packages: {        
+          app: {
+            format: 'register',
+            defaultExtension: 'js'
+          }
+        }
+      });
+      System.import('app/boot')
+            .then(null, console.error.bind(console));
+    </script>
+
+  </head>
+
+  <!-- 3. Display the application -->
+  <body>
+    <my-app>Loading...</my-app>
+  </body>
+
+</html>

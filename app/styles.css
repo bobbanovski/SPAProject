@@ -1,0 +1,11 @@
+
+.ng-touched.ng-invalid {
+    border: 1px solid red;
+}
+
+.navbar {
+    background: steelblue;
+}
+a {
+    color: white;
+}
