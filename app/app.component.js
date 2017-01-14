@@ -38,19 +38,16 @@ System.register(['angular2/core', 'angular2/router', './navbar.component', './ho
                 }
                 AppComponent = __decorate([
                     router_1.RouteConfig([
-                        { path: '/', name: 'Home', component: home_component_1.HomeComponent, useAsDefault: true },
+                        { path: '/', name: 'Home', component: home_component_1.HomeComponent },
                         { path: '/users', name: 'Users', component: users_component_1.UsersComponent },
                         { path: '/posts', name: 'Posts', component: posts_component_1.PostsComponent },
                         { path: '/*other', name: 'Other', redirectTo: ['Home'] }
                     ]),
                     core_1.Component({
                         selector: 'my-app',
-                        template: "\n        <navbar> </navbar>\n        <router-outlet></router-outlet>\n    ",
+                        template: "\n        <navbar> </navbar>\n        <div class=\"container\">\n        <router-outlet></router-outlet>\n        </div>\n    ",
                         directives: [
                             navbar_component_1.NavbarComponent,
-                            home_component_1.HomeComponent,
-                            users_component_1.UsersComponent,
-                            posts_component_1.PostsComponent,
                             router_1.ROUTER_DIRECTIVES] /*RouterOutlet, RouterLink*/
                     }), 
                     __metadata('design:paramtypes', [])

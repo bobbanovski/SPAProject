@@ -1,11 +1,18 @@
 
+
 .ng-touched.ng-invalid {
     border: 1px solid red;
 }
 
 .navbar {
-    background: steelblue;
+    background: #004d99;
 }
 a {
     color: white;
+}
+
+.router-link-active{
+    color: black;
+    background: #004080;
+    border-radius: 5px;
 }

@@ -22,15 +22,20 @@ System.register(['angular2/core', 'angular2/router'], function(exports_1, contex
             }],
         execute: function() {
             NavbarComponent = (function () {
-                function NavbarComponent() {
+                function NavbarComponent(_router) {
+                    this._router = _router;
                 }
+                NavbarComponent.prototype.isCurrentRoute = function (route) {
+                    var instruction = this._router.generate(route);
+                    return this._router.isRouteActive(instruction);
+                };
                 NavbarComponent = __decorate([
                     core_1.Component({
                         selector: 'navbar',
-                        template: "\n    <nav class=\"navbar navbar-default\">\n        <div class=\"container-fluid\">\n            <!-- Brand and toggle get grouped for better mobile display -->\n            <div class=\"navbar-header\">\n                <button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#bs-example-navbar-collapse-1\"\n                aria-expanded=\"false\">\n                    <span class=\"sr-only\">Toggle navigation</span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                    <span class=\"icon-bar\"></span>\n                </button>\n                <a class=\"navbar-brand\" [routerLink]=\"['Home']\">Muh Company</a>\n            </div>\n\n            <!-- Collect the nav links, forms, and other content for toggling -->\n            <div class=\"collapse navbar-collapse\" id=\"bs-example-navbar-collapse-1\">\n                <ul class=\"nav navbar-nav\">\n                    <!--<li><a href=\"#\">Users</a></li>-->  <!--avoid causes full page reload-->\n                    <!--<li><a href=\"#\">Posts</a></li> -->\n                    <li><a [routerLink]=\"['Users']\">Users</a></li> <!-- a tag does not have a native routerlink property -->\n                    <li><a [routerLink]=\"['Posts']\">Posts</a></li>\n                </ul>\n            </div>\n            <!--/.navbar-collapse -->\n        </div>\n    <!-- /.container-fluid -->\n</nav>\n    ",
+                        templateUrl: 'app/navbar.component.html',
                         directives: [router_1.ROUTER_DIRECTIVES]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [router_1.Router])
                 ], NavbarComponent);
                 return NavbarComponent;
             }());
