@@ -3,10 +3,14 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 import 'rxjs/add/operator/map';
 import {UserService} from './user.service';
 import {Observable} from 'rxjs/Observable';
+//import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
+import {RouterLink} from 'angular2/router';
 
 @Component({
     template: `
         <h1>Users</h1>
+        <p> <a class="btn btn-primary" [routerLink]="['NewUser']">New User</a> </p>
+        <br />
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -26,7 +30,8 @@ import {Observable} from 'rxjs/Observable';
             </tbody>
         </table>
     `,
-    providers: [UserService]
+    providers: [UserService],
+    directives: [RouterLink]
 })
 export class UsersComponent implements OnInit {
     users: any[];
