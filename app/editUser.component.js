@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/common', './newUserValidator', 'angular2/router', './user.service'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/common', 'angular2/router', './user.service', './user', './newUserValidator'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,8 +10,8 @@ System.register(['angular2/core', 'angular2/common', './newUserValidator', 'angu
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, common_1, newUserValidator_1, router_1, user_service_1;
-    var NewUserComponent;
+    var core_1, common_1, router_1, user_service_1, user_1, newUserValidator_1;
+    var EditUserComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -20,20 +20,25 @@ System.register(['angular2/core', 'angular2/common', './newUserValidator', 'angu
             function (common_1_1) {
                 common_1 = common_1_1;
             },
-            function (newUserValidator_1_1) {
-                newUserValidator_1 = newUserValidator_1_1;
-            },
             function (router_1_1) {
                 router_1 = router_1_1;
             },
             function (user_service_1_1) {
                 user_service_1 = user_service_1_1;
+            },
+            function (user_1_1) {
+                user_1 = user_1_1;
+            },
+            function (newUserValidator_1_1) {
+                newUserValidator_1 = newUserValidator_1_1;
             }],
         execute: function() {
-            NewUserComponent = (function () {
-                function NewUserComponent(fb, _router, _userService) {
+            EditUserComponent = (function () {
+                function EditUserComponent(fb, _router, _userService, _routeParams) {
                     this._router = _router;
                     this._userService = _userService;
+                    this._routeParams = _routeParams;
+                    this.user = new user_1.User();
                     this.form = fb.group({
                         name: ['', common_1.Validators.required],
                         email: ['', common_1.Validators.compose([common_1.Validators.required, newUserValidator_1.newUserValidator.checkEmail])],
@@ -46,29 +51,27 @@ System.register(['angular2/core', 'angular2/common', './newUserValidator', 'angu
                         })
                     });
                 }
-                NewUserComponent.prototype.routerCanDeactivate = function () {
-                    if (this.form.dirty)
-                        return confirm("are you sure you wish to navigate away from this page?");
-                    return true;
-                };
-                NewUserComponent.prototype.onSubmit = function () {
+                EditUserComponent.prototype.ngOnInit = function () {
                     var _this = this;
-                    this._userService.addUser(this.form.value)
-                        .subscribe(function (x) {
-                        _this._router.navigate(['Users']);
+                    var id = this._routeParams.get("id");
+                    this._userService.getUser(id)
+                        .subscribe(function (user) { return _this.user = user; }, function (response) {
+                        if (response.status == 404) {
+                            _this._router.navigate(['NotFound']);
+                        }
                     });
                 };
-                NewUserComponent = __decorate([
+                EditUserComponent = __decorate([
                     core_1.Component({
-                        templateUrl: 'app/newUser.component.html',
+                        templateUrl: 'app/editUser.component.html',
                         providers: [user_service_1.UserService]
                     }), 
-                    __metadata('design:paramtypes', [common_1.FormBuilder, router_1.Router, user_service_1.UserService])
-                ], NewUserComponent);
-                return NewUserComponent;
+                    __metadata('design:paramtypes', [common_1.FormBuilder, router_1.Router, user_service_1.UserService, router_1.RouteParams])
+                ], EditUserComponent);
+                return EditUserComponent;
             }());
-            exports_1("NewUserComponent", NewUserComponent);
+            exports_1("EditUserComponent", EditUserComponent);
         }
     }
 });
-//# sourceMappingURL=newUser.component.js.map
+//# sourceMappingURL=editUser.component.js.map

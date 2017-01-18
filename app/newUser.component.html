@@ -1,7 +1,7 @@
 <h1>Add a User</h1>
 <div class="row">
     <div class="col-lg-6">
-        <form [ngFormModel]="form">
+        <form [ngFormModel]="form" (ngSubmit)="onSubmit(form)">
             <fieldset>
                 <legend>
                     User
@@ -15,6 +15,11 @@
                         ngControl="name"
                         #name="ngForm">
                 </div>
+                <div *ngIf="name.touched && name.errors">
+                    <div *ngIf="name.errors.required" class="alert alert-danger">
+                        Username is required
+                    </div>
+                </div>
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input 
@@ -23,6 +28,14 @@
                         class="form-control"
                         ngControl="email"
                         #email="ngForm">
+                </div>
+                <div *ngIf="email.touched && email.errors">
+                    <div *ngIf="email.errors.required" class="alert alert-danger">
+                        Email is required
+                    </div>
+                    <div *ngIf="email.errors.checkEmail" class="alert alert-danger">
+                        Incorrect Email entered
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone</label>
@@ -66,17 +79,17 @@
                         #city="ngForm">
                 </div>
                 <div class="form-group">
-                    <label for="zip">Zip</label>
+                    <label for="zipcode">Zip</label>
                     <input 
-                        id="zip"
+                        id="zipcode"
                         type="text"
                         class="form-control"
-                        ngControl="zip"
-                        #zip="ngForm">
+                        ngControl="zipcode"
+                        #zipcode="ngForm">
                 </div>
             </fieldset>
 
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
         </form>
     </div>
 </div>
