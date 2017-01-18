@@ -1,17 +1,21 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {ControlGroup, Validators, FormBuilder} from 'angular2/common';
 import {newUserValidator} from './newUserValidator';
-import {Router, CanDeactivate} from 'angular2/router';
+import {Router, CanDeactivate, RouteParams} from 'angular2/router';
 import {UserService} from './user.service';
+import {User} from './user';
 
 @Component({
     templateUrl: 'app/newUser.component.html',
     providers: [UserService]
 })
 
-export class NewUserComponent implements CanDeactivate{
+export class NewUserComponent implements OnInit, CanDeactivate{
     form: ControlGroup;
-    constructor(fb: FormBuilder, private _router: Router, private _userService: UserService){
+    title: string;
+    user = new User();
+
+    constructor(fb: FormBuilder,private _router: Router,private _routeParams: RouteParams, private _userService: UserService){
         this.form = fb.group({
             name: ['', Validators.required],
             email: ['', Validators.compose([Validators.required, newUserValidator.checkEmail ]) ],
@@ -35,6 +39,23 @@ export class NewUserComponent implements CanDeactivate{
             .subscribe(x => {
                 this._router.navigate(['Users']);    
             })
-        
+    }
+
+    ngOnInit(){
+        var id = this._routeParams.get("id");
+        this.title = id ? "Edit User" : "New User";
+
+        if(!id)
+            return;
+
+        this._userService.getUser(id)
+            .subscribe(
+                user => this.user = user,
+                response => {
+                    if (response.status == 404) {
+                        this._router.navigate(['NotFound']);
+                    }
+                }
+            )
     }
 }
