@@ -35,15 +35,20 @@ System.register(['angular2/core', 'rxjs/add/operator/map', './user.service', 'an
                         .subscribe(function (users) { return _this.users = users; });
                 };
                 UsersComponent.prototype.deleteUser = function (user) {
-                    if (confirm("Are you sure you wish to delete this user?"))
+                    var _this = this;
+                    if (confirm("Are you sure you wish to delete this user?")) {
+                        var index = this.users.indexOf(user);
+                        this.users.splice(index, 1);
                         this._service.deleteUser(user)
                             .subscribe(null, function (err) {
                             alert("Deletion Unsuccessful");
+                            _this.users.splice(index, 0, user);
                         });
+                    }
                 };
                 UsersComponent = __decorate([
                     core_1.Component({
-                        template: "\n        <h1>Users</h1>\n        <p> <a class=\"btn btn-primary\" [routerLink]=\"['NewUser']\">New User</a> </p>\n        <br />\n        <table class=\"table table-bordered\">\n            <thead>\n                <tr>\n                    <th>Name</th>\n                    <th>Email</th>\n                    <th>Edit</th>\n                    <th>Delete</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"#user of users\">\n                    <td>{{ user.name}}</td>\n                    <td>{{ user.email }}</td>\n                    <td><a [routerLink]=\"['EditUser', {id: user.id}]\"> <i class=\"glyphicon glyphicon-edit\" ></i> </a> </td>\n                    <td><i (click)=\"deleteUser(user)\" class=\"glyphicon glyphicon-remove\"></i></td>\n                </tr>\n            </tbody>\n        </table>\n    ",
+                        template: "\n        <h1>Users</h1>\n        <p> <a class=\"btn btn-primary\" [routerLink]=\"['NewUser']\">New User</a> </p>\n        <br />\n        <table class=\"table table-bordered\">\n            <thead>\n                <tr>\n                    <th>Name</th>\n                    <th>Email</th>\n                    <th>Edit</th>\n                    <th>Delete</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"#user of users\">\n                    <td>{{ user.name}}</td>\n                    <td>{{ user.email }}</td>\n                    <td><a [routerLink]=\"['EditUser', {id: user.id}]\"> <i class=\"glyphicon glyphicon-edit\" ></i> </a> </td>\n                    <td><i (click)=\"deleteUser(user)\" class=\"glyphicon glyphicon-remove onHover\"></i></td>\n                </tr>\n            </tbody>\n        </table>\n    ",
                         providers: [user_service_1.UserService],
                         directives: [router_1.RouterLink]
                     }), 

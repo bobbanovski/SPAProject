@@ -16,3 +16,11 @@ a {
     background: #004080;
     border-radius: 5px;
 }
+
+.onHover{
+    cursor: crosshair;
+}
+
+i:hover{
+    color: #00ffcc;
+}
