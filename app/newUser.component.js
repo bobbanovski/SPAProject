@@ -58,10 +58,19 @@ System.register(['angular2/core', 'angular2/common', './newUserValidator', 'angu
                 };
                 NewUserComponent.prototype.onSubmit = function () {
                     var _this = this;
-                    this._userService.addUser(this.form.value)
-                        .subscribe(function (x) {
-                        _this._router.navigate(['Users']);
-                    });
+                    var id = this._routeParams.get("id");
+                    if (!id) {
+                        this._userService.addUser(this.form.value)
+                            .subscribe(function (x) {
+                            _this._router.navigate(['Users']);
+                        });
+                    }
+                    else {
+                        this._userService.updateUser(this.form.value, id)
+                            .subscribe(function (x) {
+                            _this._router.navigate(['Users']);
+                        });
+                    }
                 };
                 NewUserComponent.prototype.ngOnInit = function () {
                     var _this = this;

@@ -35,10 +35,18 @@ export class NewUserComponent implements OnInit, CanDeactivate{
         }
     
     onSubmit(){
+        var id = this._routeParams.get("id");
+        if(!id){
         this._userService.addUser(this.form.value)
             .subscribe(x => {
                 this._router.navigate(['Users']);    
             })
+        } else {
+        this._userService.updateUser(this.form.value, id)
+            .subscribe(x => {
+                this._router.navigate(['Users']);
+            })
+        }
     }
 
     ngOnInit(){
