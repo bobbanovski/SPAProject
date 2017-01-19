@@ -41,6 +41,7 @@ export class NewUserComponent implements OnInit, CanDeactivate{
             } else {
             result = this._userService.updateUser(this.user)            
             }
+            
             result.subscribe(x => {this._router.navigate(['Users']);
         });
     }

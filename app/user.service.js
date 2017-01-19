@@ -40,7 +40,12 @@ System.register(['angular2/http', 'rxjs/add/operator/map', 'angular2/core'], fun
                         .map(function (res) { return res.json(); });
                 };
                 UserService.prototype.updateUser = function (user) {
-                    return this._http.put(this.getUserUrl(user.id), JSON.stringify(user));
+                    return this._http.put(this.getUserUrl(user.id), JSON.stringify(user))
+                        .map(function (res) { return res.json(); });
+                };
+                UserService.prototype.deleteUser = function (user) {
+                    return this._http.delete(this.getUserUrl(user.id))
+                        .map(function (res) { return res.json(); });
                 };
                 UserService.prototype.getUserUrl = function (userId) {
                     return this._userUrl + "/" + userId;

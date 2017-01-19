@@ -25,7 +25,7 @@ import {RouterLink} from 'angular2/router';
                     <td>{{ user.name}}</td>
                     <td>{{ user.email }}</td>
                     <td><a [routerLink]="['EditUser', {id: user.id}]"> <i class="glyphicon glyphicon-edit" ></i> </a> </td>
-                    <td><i class="glyphicon glyphicon-remove"></i></td>
+                    <td><i (click)="deleteUser(user)" class="glyphicon glyphicon-remove"></i></td>
                 </tr>
             </tbody>
         </table>
@@ -41,5 +41,13 @@ export class UsersComponent implements OnInit {
     ngOnInit(){
         this._service.getUsers()
             .subscribe(users => this.users = users);
+    }
+
+    deleteUser(user){
+        if (confirm("Are you sure you wish to delete this user?"))
+            this._service.deleteUser(user)
+                .subscribe(null, err => {
+                    alert("Deletion Unsuccessful")
+                });
     }
 }
