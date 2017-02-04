@@ -53,7 +53,6 @@ export class UsersComponent implements OnInit {
                     alert("Deletion Unsuccessful")
                     this.users.splice(index, 0, user);
                 });
-
         }
     }
 }

@@ -21,6 +21,12 @@ a {
     cursor: crosshair;
 }
 
+.posts{
+    border: solid 1px white;
+    border-radius: 3px;
+    padding: 0;
+}
+
 i:hover{
     color: #00ffcc;
 }
