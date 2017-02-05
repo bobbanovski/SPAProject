@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'rxjs/add/operator/map', './user.service', 'angular2/router'], function(exports_1, context_1) {
+System.register(['angular2/core', 'rxjs/add/operator/map', './user.service', 'angular2/router', './spinner.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'rxjs/add/operator/map', './user.service', 'an
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, user_service_1, router_1;
+    var core_1, user_service_1, router_1, spinner_component_1;
     var UsersComponent;
     return {
         setters:[
@@ -23,16 +23,20 @@ System.register(['angular2/core', 'rxjs/add/operator/map', './user.service', 'an
             },
             function (router_1_1) {
                 router_1 = router_1_1;
+            },
+            function (spinner_component_1_1) {
+                spinner_component_1 = spinner_component_1_1;
             }],
         execute: function() {
             UsersComponent = (function () {
                 function UsersComponent(_service) {
                     this._service = _service;
+                    this.isLoading = true;
                 }
                 UsersComponent.prototype.ngOnInit = function () {
                     var _this = this;
                     this._service.getUsers()
-                        .subscribe(function (users) { return _this.users = users; });
+                        .subscribe(function (users) { return _this.users = users; }, null, function () { _this.isLoading = false; });
                 };
                 UsersComponent.prototype.deleteUser = function (user) {
                     var _this = this;
@@ -48,9 +52,9 @@ System.register(['angular2/core', 'rxjs/add/operator/map', './user.service', 'an
                 };
                 UsersComponent = __decorate([
                     core_1.Component({
-                        template: "\n        <h1>Users</h1>\n        <p> <a class=\"btn btn-primary\" [routerLink]=\"['NewUser']\">New User</a> </p>\n        <br />\n        <table class=\"table table-bordered\">\n            <thead>\n                <tr>\n                    <th>Name</th>\n                    <th>Email</th>\n                    <th>Edit</th>\n                    <th>Delete</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"#user of users\">\n                    <td>{{ user.name}}</td>\n                    <td>{{ user.email }}</td>\n                    <td><a [routerLink]=\"['EditUser', {id: user.id}]\"> <i class=\"glyphicon glyphicon-edit\" ></i> </a> </td>\n                    <td><i (click)=\"deleteUser(user)\" class=\"glyphicon glyphicon-remove onHover\"></i></td>\n                </tr>\n            </tbody>\n        </table>\n    ",
+                        template: "\n        <h1>Users</h1>\n        <spinner [visible]=isLoading></spinner> \n        <p> <a class=\"btn btn-primary\" [routerLink]=\"['NewUser']\">New User</a> </p>\n        <br />\n        <table class=\"table table-bordered\">\n            <thead>\n                <tr>\n                    <th>Name</th>\n                    <th>Email</th>\n                    <th>Edit</th>\n                    <th>Delete</th>\n                </tr>\n            </thead>\n            <tbody>\n                <tr *ngFor=\"#user of users\">\n                    <td>{{ user.name}}</td>\n                    <td>{{ user.email }}</td>\n                    <td><a [routerLink]=\"['EditUser', {id: user.id}]\"> <i class=\"glyphicon glyphicon-edit\" ></i> </a> </td>\n                    <td><i (click)=\"deleteUser(user)\" class=\"glyphicon glyphicon-remove onHover\"></i></td>\n                </tr>\n            </tbody>\n        </table>\n    ",
                         providers: [user_service_1.UserService],
-                        directives: [router_1.RouterLink]
+                        directives: [router_1.RouterLink, spinner_component_1.SpinnerComponent]
                     }), 
                     __metadata('design:paramtypes', [user_service_1.UserService])
                 ], UsersComponent);

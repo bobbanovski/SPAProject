@@ -35,11 +35,17 @@ System.register(['angular2/core', './post.service', './spinner.component'], func
                     this._postService.getPosts()
                         .subscribe(function (posts) { return _this.posts = posts; }, null, function () { _this.isLoading = false; });
                 };
+                PostsComponent.prototype.selectPost = function (post) {
+                    this.currentPost = post;
+                };
                 PostsComponent = __decorate([
                     core_1.Component({
                         templateUrl: 'app/posts.component.html',
                         providers: [post_service_1.PostService],
-                        directives: [spinner_component_1.SpinnerComponent]
+                        directives: [spinner_component_1.SpinnerComponent],
+                        styles: [
+                            "\n        .posts li:hover { background: #3399ff; }\n        "
+                        ]
                     }), 
                     __metadata('design:paramtypes', [post_service_1.PostService])
                 ], PostsComponent);

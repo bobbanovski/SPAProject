@@ -3,6 +3,19 @@
     <spinner [visible]=isLoading></spinner>    
 <div class="col-md-6 posts">
     <ul class="list-group" *ngFor="#post of posts">
-        <li class="list-group-item">{{post.title}}</li>    
+        <li class="list-group-item" 
+        [class.active]="currentPost == post"
+        (click)="selectPost(post)">{{post.title}}</li>    
     </ul>
+</div>
+
+<div class="col-md-6 detail">
+    <div *ngIf="currentPost" class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{currentPost.title}}</h3>
+    </div>
+    <div class="panel-body">
+        {{currentPost.body}}
+    </div>
+    </div>
 </div>

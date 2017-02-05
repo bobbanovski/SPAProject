@@ -6,16 +6,26 @@ import {SpinnerComponent} from './spinner.component';
 @Component({
     templateUrl: 'app/posts.component.html',
     providers: [PostService],
-    directives: [SpinnerComponent]
+    directives: [SpinnerComponent],
+    styles: [
+        `
+        .posts li:hover { background: #3399ff; }
+        `
+    ]
 })
 export class PostsComponent implements OnInit{
     posts = [];
+    currentPost;
+
     constructor (private _postService: PostService){}
     isLoading = true;
     ngOnInit(){
         this._postService.getPosts()
             .subscribe(posts => this.posts = posts,
             null,
-            () => {this.isLoading = false });
+            () => {this.isLoading = false });      
+    }
+    selectPost(post){
+        this.currentPost = post;
     }
 }

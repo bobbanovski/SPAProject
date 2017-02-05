@@ -30,3 +30,7 @@ a {
 i:hover{
     color: #00ffcc;
 }
+
+ul:hover{
+    color: white;
+}

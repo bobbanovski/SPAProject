@@ -5,10 +5,12 @@ import {UserService} from './user.service';
 import {Observable} from 'rxjs/Observable';
 //import {ROUTER_DIRECTIVES, Router} from 'angular2/router';
 import {RouterLink} from 'angular2/router';
+import {SpinnerComponent} from './spinner.component';
 
 @Component({
     template: `
         <h1>Users</h1>
+        <spinner [visible]=isLoading></spinner> 
         <p> <a class="btn btn-primary" [routerLink]="['NewUser']">New User</a> </p>
         <br />
         <table class="table table-bordered">
@@ -31,16 +33,17 @@ import {RouterLink} from 'angular2/router';
         </table>
     `,
     providers: [UserService],
-    directives: [RouterLink]
+    directives: [RouterLink, SpinnerComponent]
 })
 export class UsersComponent implements OnInit {
-    users: any[];
-    
+    users: any[];    
     constructor(private _service: UserService){}
-
+    isLoading = true;
     ngOnInit(){
         this._service.getUsers()
-            .subscribe(users => this.users = users);
+            .subscribe(users => this.users = users,
+            null,
+            () => {this.isLoading = false});
     }
 
     deleteUser(user){
