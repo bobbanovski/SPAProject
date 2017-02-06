@@ -34,3 +34,7 @@ i:hover{
 ul:hover{
     color: white;
 }
+
+.commentImage{
+    border-radius: 100%;
+}

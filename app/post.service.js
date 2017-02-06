@@ -30,6 +30,10 @@ System.register(['angular2/http', 'angular2/core'], function(exports_1, context_
                     return this._http.get(this._postUrl)
                         .map(function (res) { return res.json(); });
                 };
+                PostService.prototype.getComments = function (id) {
+                    return this._http.get(this._postUrl + "/" + id + "/comments")
+                        .map(function (res) { return res.json(); });
+                };
                 PostService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [http_1.Http])

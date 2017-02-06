@@ -1,6 +1,6 @@
 
 <h1>Posts</h1>    
-    <spinner [visible]=isLoading></spinner>    
+    <spinner [visible]=postsLoading></spinner>    
 <div class="col-md-6 posts">
     <ul class="list-group" *ngFor="#post of posts">
         <li class="list-group-item" 
@@ -16,6 +16,19 @@
     </div>
     <div class="panel-body">
         {{currentPost.body}}
+    </div>
+    <hr/>
+    <spinner [visible]=commentsLoading></spinner>
+    <div class="media" *ngFor="#comment of currentPost.comments">
+            <div class="media-left">
+                <a href="#">
+                <img class="media-object commentImage" src="http://lorempixel.com/100/100/" >
+                </a>
+            </div>
+            <div class="media-body">
+            <h4 class="media-heading">{{comment.email}}</h4>
+            {{comment.body}}
+        </div>    
     </div>
     </div>
 </div>
