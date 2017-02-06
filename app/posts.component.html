@@ -5,7 +5,7 @@
     
     
     <select #u class="form-control" (change)="reloadPosts({userId: u.value})">
-        <option>Select a user...</option>
+        <option value="">Select a user...</option>
         <option *ngFor="#user of users" value="{{user.id}}">{{user.name}}</option>
     </select>
 

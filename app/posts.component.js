@@ -57,7 +57,7 @@ System.register(['angular2/core', './post.service', './user.service', './spinner
                     var _this = this;
                     this.currentPost = null;
                     this.postsLoading = true;
-                    this._postService.getUserPosts(userSelected)
+                    this._postService.getPosts(userSelected)
                         .subscribe(function (posts) { return _this.posts = posts; }, null, function () { _this.postsLoading = false; });
                 };
                 PostsComponent = __decorate([

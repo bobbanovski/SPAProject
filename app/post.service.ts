@@ -10,21 +10,16 @@ export class PostService {
     constructor (private _http: Http){        
     }
 
-    getPosts(){
-        return this._http.get(this._postUrl)
-            .map(res => res.json());
+    getPosts(userSelected?){
+        var url = this._postUrl;
+        if(userSelected && userSelected.userId){
+            url += "?userId=" + userSelected.userId                
+        }
+        return this._http.get(url)
+            .map(res => res.json());        
     }
     getComments(id){
         return this._http.get(this._postUrl + "/" + id + "/comments")
             .map(res => res.json());
-    }
-
-    getUserPosts(user?){
-        if(user && user.userId){
-            return this._http.get(this._postUrl + "?userId=" + user.userId)
-                .map(res => res.json());
-        }
-        return this._http.get(this._postUrl)
-            .map(res => res.json());
-    }
+    }    
 }

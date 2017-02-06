@@ -26,20 +26,16 @@ System.register(['angular2/http', 'angular2/core'], function(exports_1, context_
                     this._http = _http;
                     this._postUrl = "http://jsonplaceholder.typicode.com/posts";
                 }
-                PostService.prototype.getPosts = function () {
-                    return this._http.get(this._postUrl)
+                PostService.prototype.getPosts = function (userSelected) {
+                    var url = this._postUrl;
+                    if (userSelected && userSelected.userId) {
+                        url += "?userId=" + userSelected.userId;
+                    }
+                    return this._http.get(url)
                         .map(function (res) { return res.json(); });
                 };
                 PostService.prototype.getComments = function (id) {
                     return this._http.get(this._postUrl + "/" + id + "/comments")
-                        .map(function (res) { return res.json(); });
-                };
-                PostService.prototype.getUserPosts = function (user) {
-                    if (user && user.userId) {
-                        return this._http.get(this._postUrl + "?userId=" + user.userId)
-                            .map(function (res) { return res.json(); });
-                    }
-                    return this._http.get(this._postUrl)
                         .map(function (res) { return res.json(); });
                 };
                 PostService = __decorate([

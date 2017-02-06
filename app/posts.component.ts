@@ -51,7 +51,7 @@ export class PostsComponent implements OnInit{
     reloadPosts(userSelected){
         this.currentPost = null;
         this.postsLoading = true;        
-        this._postService.getUserPosts(userSelected)
+        this._postService.getPosts(userSelected)
             .subscribe(posts => this.posts = posts,
                 null,
                 () => {this.postsLoading = false;}
