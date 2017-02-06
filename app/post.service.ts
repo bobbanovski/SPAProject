@@ -18,4 +18,13 @@ export class PostService {
         return this._http.get(this._postUrl + "/" + id + "/comments")
             .map(res => res.json());
     }
+
+    getUserPosts(user?){
+        if(user && user.userId){
+            return this._http.get(this._postUrl + "?userId=" + user.userId)
+                .map(res => res.json());
+        }
+        return this._http.get(this._postUrl)
+            .map(res => res.json());
+    }
 }
