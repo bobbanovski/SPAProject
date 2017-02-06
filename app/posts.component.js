@@ -1,4 +1,4 @@
-System.register(['angular2/core', './post.service', './user.service', './spinner.component'], function(exports_1, context_1) {
+System.register(['angular2/core', './post.service', './user.service', './spinner.component', './pagination.component'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './post.service', './user.service', './spinner
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, post_service_1, user_service_1, spinner_component_1;
+    var core_1, post_service_1, user_service_1, spinner_component_1, pagination_component_1;
     var PostsComponent;
     return {
         setters:[
@@ -25,6 +25,9 @@ System.register(['angular2/core', './post.service', './user.service', './spinner
             },
             function (spinner_component_1_1) {
                 spinner_component_1 = spinner_component_1_1;
+            },
+            function (pagination_component_1_1) {
+                pagination_component_1 = pagination_component_1_1;
             }],
         execute: function() {
             PostsComponent = (function () {
@@ -64,7 +67,7 @@ System.register(['angular2/core', './post.service', './user.service', './spinner
                     core_1.Component({
                         templateUrl: 'app/posts.component.html',
                         providers: [post_service_1.PostService, user_service_1.UserService],
-                        directives: [spinner_component_1.SpinnerComponent],
+                        directives: [spinner_component_1.SpinnerComponent, pagination_component_1.PaginationComponent],
                         styles: [
                             "\n        .posts li:hover { background: #3399ff; }\n        "
                         ]

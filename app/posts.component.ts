@@ -3,11 +3,12 @@ import {PostService} from './post.service';
 import {UserService} from './user.service';
 import {Observable} from 'rxjs/Observable';
 import {SpinnerComponent} from './spinner.component';
+import {PaginationComponent} from './pagination.component'
 
 @Component({
     templateUrl: 'app/posts.component.html',
     providers: [PostService, UserService],
-    directives: [SpinnerComponent],
+    directives: [SpinnerComponent, PaginationComponent],
     styles: [
         `
         .posts li:hover { background: #3399ff; }
